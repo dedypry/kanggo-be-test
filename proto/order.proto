@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package order;
+
+service OrderService {
+  rpc CreateOrder (OrderBody) returns (OrderResponse);
+  rpc List (ListOrder) returns (ListOrderResponse);
+  rpc CancelOrder (OrderCancelBody) returns (OrderCancelResponse);
+  rpc Status (UpdateStatus) returns (Empty);
+}
+message Empty {}
+
+message ListOrder {
+  int32 id = 1;
+}
+
+message UpdateStatus{
+  string status = 1;
+}
+
+message OrderBody {
+  repeated int32 workers = 1;
+  string start_date = 2;
+  string end_date = 3;
+  int32 user_id = 4;
+}
+
+message OrderResponse {
+  int32 order_id = 1;
+  repeated int32 workers = 2;
+  int32 total_day = 3;
+  string status = 4;
+  int32 total_price = 5;
+  string created_at = 6;
+}
+
+
+message WorkerInfo {
+    int32 worker_id = 1;
+    string worker_name = 2;
+    int32 price = 3;
+  }
+  
+  message OrderDetail {
+    int32 order_id = 1;
+    string status = 2;
+    string start_date = 3;
+    string end_date = 4;
+    int32 total_day = 5;
+    int32 total_price = 6;
+    repeated WorkerInfo workers = 7;
+    string created_at = 8;
+  }
+  
+  message ListOrderResponse {
+    repeated OrderDetail orders = 1;
+  }
+
+  message OrderCancelBody {
+    string status = 1;
+    int32 id = 2;
+    int32 user_id =3;
+  }
+
+  message OrderCancelResponse{
+    int32 order_id = 1;
+    string status = 2;
+    string created_at = 3;
+    string updated_at = 4;
+  }

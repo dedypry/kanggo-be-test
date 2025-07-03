@@ -1,0 +1,77 @@
+version: '3.7'
+services:
+    gateway:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: 'GATEWAY'
+      ports:
+        - 3684:3000
+      volumes:
+        - .:/app
+      networks:
+        - kanggo_be_test
+      depends_on:
+        - postgresql
+      command: sh -c 'pnpm start:dev'
+      restart: always
+
+    workers:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: 'WORKER-SERVICE'
+      volumes:
+        - .:/app
+      networks:
+        - kanggo_be_test
+      depends_on:
+        - postgresql
+      command: sh -c 'pnpm start:dev worker_service'
+      restart: always
+
+    order:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: 'ORDER-SERVICE'
+      volumes:
+        - .:/app
+      networks:
+        - kanggo_be_test
+      depends_on:
+        - postgresql
+      command: sh -c 'pnpm start:dev order_service'
+      restart: always
+
+    auth:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: 'AUTH-SERVICE'
+      volumes:
+        - .:/app
+      networks:
+        - kanggo_be_test
+      depends_on:
+        - postgresql
+      command: sh -c 'pnpm start:dev auth_service'
+      restart: always
+
+    postgresql:
+      image: postgres:alpine
+      container_name: 'postgres-service'
+      restart: always
+      env_file:
+        - .env
+      volumes:
+        - ~/docker-conf/dev/pgdata:/var/lib/postgresql/data
+      ports:
+        - 1122:5432
+      networks:
+        - kanggo_be_test
+
+networks:
+  kanggo_be_test:
+    driver: bridge
+
