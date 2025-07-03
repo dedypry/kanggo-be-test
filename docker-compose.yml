@@ -7,13 +7,13 @@ services:
       container_name: 'GATEWAY'
       ports:
         - 3684:3000
-      volumes:
-        - .:/app
       networks:
         - kanggo_be_test
+      volumes:
+        - ./proto:/proto
       depends_on:
         - postgresql
-      command: sh -c 'pnpm start:dev'
+      command: sh -c 'pnpm build && pnpm start:prod'
       restart: always
 
     workers:
@@ -21,13 +21,13 @@ services:
         context: .
         dockerfile: Dockerfile
       container_name: 'WORKER-SERVICE'
-      volumes:
-        - .:/app
       networks:
         - kanggo_be_test
+      volumes:
+        - ./proto:/proto
       depends_on:
         - postgresql
-      command: sh -c 'pnpm start:dev worker_service'
+      command: sh -c 'pnpm build worker_service && pnpm start:worker'
       restart: always
 
     order:
@@ -36,12 +36,12 @@ services:
         dockerfile: Dockerfile
       container_name: 'ORDER-SERVICE'
       volumes:
-        - .:/app
+        - ./proto:/proto
       networks:
         - kanggo_be_test
       depends_on:
         - postgresql
-      command: sh -c 'pnpm start:dev order_service'
+      command: sh -c 'pnpm build order_service && pnpm start:order'
       restart: always
 
     auth:
@@ -49,13 +49,13 @@ services:
         context: .
         dockerfile: Dockerfile
       container_name: 'AUTH-SERVICE'
-      volumes:
-        - .:/app
       networks:
         - kanggo_be_test
+      volumes:
+        - ./proto:/proto
       depends_on:
         - postgresql
-      command: sh -c 'pnpm start:dev auth_service'
+      command: sh -c 'pnpm build auth_service && pnpm start:auth'
       restart: always
 
     postgresql:

@@ -20,6 +20,14 @@
 </p>
 
 ---
+## 📚 Documentation
+
+Full API documentation is available at the following link:
+
+👉 [https://1d824wtfe7.apidog.io/](https://1d824wtfe7.apidog.io/)
+---
+
+
 
 ## 🧾 Description
 
@@ -78,8 +86,19 @@ These are powered by `@nestjs/schedule`.
 # Copy .env from .env.example
 cp .env.example .env
 
+npm i -g pnpm
+
+pnpm config set registry https://registry.npmjs.org
+
 # Install dependencies
 pnpm install
 
 # Start development environment
 docker-compose up
+
+# Or Start in the background
+docker-compose up -d
+
+
+
+
