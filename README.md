@@ -24,7 +24,7 @@
 
 Full API documentation is available at the following link:
 
-👉 [https://1d824wtfe7.apidog.io/](https://1d824wtfe7.apidog.io/)
+👉 [https://kanggo.dedypry.id/](https://kanggo.dedypry.id/)
 ---
 
 
