@@ -27,7 +27,32 @@ Full API documentation is available at the following link:
 👉 [https://kanggo.dedypry.id/](https://kanggo.dedypry.id/)
 ---
 
+## 🧑‍💻 User Accounts
 
+Below are the predefined user accounts you can use to log in:
+
+---
+
+### 👤 Customer Account
+
+```json
+{
+  "email_cellphone": "john.doe@gmail.com",
+  "password": "password"
+}
+```
+---
+
+### 👤 Admin Account
+
+```json
+{
+  "email_cellphone": "admin@gmail.com",
+  "password": "password"
+}
+```
+
+---
 
 ## 🧾 Description
 
